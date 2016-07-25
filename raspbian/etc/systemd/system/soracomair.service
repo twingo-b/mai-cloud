@@ -1,0 +1,8 @@
+[Unit]
+Description=soracomair wvdial service
+Wants=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/sbin/connect_air.sh
+ExecStop=/bin/kill -HUP $MAINPID && /usr/bin/killall wvdial

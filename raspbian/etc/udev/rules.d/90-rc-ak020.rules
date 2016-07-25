@@ -1,0 +1,2 @@
+KERNEL=="ttyUSB*", ATTRS{bNumEndpoints}=="03", ATTRS{bInterfaceNumber}=="02", SYMLINK+="modem", ENV{SYSTEMD_WANTS}="soracomair.service"
+
