@@ -11,3 +11,11 @@ pi@raspberrypi:~ $ crontab -l
 * 6-18 * * * python /usr/src/app/send_sensor_data_to_cloud.py &> /dev/null
 */5 6-18 * * * /usr/src/app/take_picture.sh && python /usr/src/app/upload_image.py [/path/to/image.jpg] [S3BucketName] [User-Agent] &> /dev/null
 ```
+
+## SORACOM Airへの接続/切断
+- 自動接続されるので、一時停止したい時用
+```bash
+pi@raspberrypi:~ $ sudo systemctl stop soracomair.service
+pi@raspberrypi:~ $ sudo systemctl start soracomair.service
+pi@raspberrypi:~ $ sudo systemctl status soracomair.service
+```
