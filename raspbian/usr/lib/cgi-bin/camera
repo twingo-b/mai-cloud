@@ -1,0 +1,14 @@
+#!/bin/bash
+# 温度/気圧/湿度の取得
+# temp=$(tail -1 /sys/bus/w1/devices/28-*/w1_slave | tr = \ | awk '{print $11/1000}')
+bme280=$(python /usr/src/app/bme280.py)
+
+# コンテントタイプはJPEG
+cat <<EOF
+Content-type:image/jpeg
+
+EOF
+
+# カメラで撮ったJPEGデータを標準出力からクライアントに渡す(温度のキャプション付き)
+fswebcam -r 640x480 --title "$bme280" /dev/stdout
+

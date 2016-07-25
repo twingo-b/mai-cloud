@@ -1,0 +1,21 @@
+{
+  "Id": "Policy1469335844789",
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "Stmt1469335842914",
+      "Action": [
+        "s3:PutObject",
+        "s3:PutObjectAcl"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:aws:s3:::[backet-name]/incoming/camera/*",
+      "Condition": {
+        "StringEquals": {
+          "aws:UserAgent": "ex: soracom-handson-client"
+        }
+      },
+      "Principal": "*"
+    }
+  ]
+}
