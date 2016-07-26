@@ -20,12 +20,15 @@ exports.handler = (event, context, callback) => {
         Key: key
     };
 
-    let last_modified_jst;
+    let last_modified_date_jst;
+    let last_modified_datetime_jst;
     let java_web_token;
     let imsi;
     s3.headObject(head_params).promise().then(function(data) {
-        last_modified_jst = moment(new Date(data.LastModified)).tz("Asia/Tokyo").format('YYYY-MM-DD-HH-mm-ss');
-        console.log('last_modified_jst: ' + last_modified_jst);
+        const last_modified = new Date(data.LastModified)
+        last_modified_date_jst = moment(last_modified).tz("Asia/Tokyo").format('YYYY-MM-DD');
+        last_modified_datetime_jst = moment(last_modified).tz("Asia/Tokyo").format('YYYY-MM-DD-HH-mm-ss');
+        console.log('last_modified_datetime_jst: ' + last_modified_datetime_jst);
 
         const token = data.Metadata['jwt'];
         console.log('token: ' + token);
@@ -46,7 +49,7 @@ exports.handler = (event, context, callback) => {
 
             const copy_params = {
                 Bucket: bucket,
-                Key: 'camera/' + imsi + '/' + last_modified_jst + '.jpg',
+                Key: 'camera/' + imsi + '/' + last_modified_date_jst + '/' + last_modified_datetime_jst + '.jpg',
                 CopySource: bucket + '/' + key,
                 ACL: 'public-read',
             };
