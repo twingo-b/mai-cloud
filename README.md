@@ -21,3 +21,18 @@ pi@raspberrypi:~ $ sudo systemctl stop soracomair.service
 pi@raspberrypi:~ $ sudo systemctl start soracomair.service
 pi@raspberrypi:~ $ sudo systemctl status soracomair.service
 ```
+
+## タイムラプス動画出力 on EC2 Ubuntu Server 14.04 LTS
+- 参考:[連番静止画からタイムラプス動画を作る](http://qiita.com/riocampos/items/2f4fe927b5cf99aff767)
+```bash
+sudo apt-get install libav-tools awscli
+cd mnt
+sudo mkdir [YYYY-MM-DD]
+sudo chown ubuntu:ubuntu [YYYY-MM-DD]
+
+aws --region [Region] s3 cp --recursive s3://[S3BucketName]/camera/[IMSI]/[YYYY-MM-DD]/ [YYYY-MM-DD]/
+cd [YYYY-MM-DD]/
+ls *.jpg | awk '{ printf "mv %s image-%04d.jpg\n", $0, NR }' | sh
+
+avconv -f image2 -r 10 -i image-%04d.jpg -r 10 -an -vcodec libx264 -pix_fmt yuv420p -qscale 0 video.mp4
+```
