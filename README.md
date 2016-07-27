@@ -1,5 +1,7 @@
 # mai-cloud
 
+[![タイムラプス動画](http://img.youtube.com/vi/w0w_pv3Z3lo/0.jpg)](https://www.youtube.com/watch?v=w0w_pv3Z3lo)
+
 ## 概要
 - [ラズパイ x ソラコムキャンペーン 植物観察キット](https://github.com/soracom/handson/blob/master/plant-observation/kit.md)を使って雲のタイムラプスを作成できるように改造
 - [Raspberry Pi 2で温湿度・気圧センサのBME280をPythonから使う](http://qiita.com/masato/items/027e5c824ae75ab417c1)を利用できるように修正
